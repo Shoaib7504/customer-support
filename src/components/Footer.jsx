@@ -4,10 +4,10 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div className='max-w-400 mx-auto'>
+        <div className='w-full mx-auto'>
             <footer className="bg-gray-900 text-white py-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 justify-items-center">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-8 justify-items-center">
                         {/* Company Info */}
                         <div>
                             <h3 className="text-xl font-semibold mb-4">CS — Ticket System</h3>

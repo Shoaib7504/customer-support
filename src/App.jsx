@@ -1,16 +1,25 @@
+import { Suspense } from 'react'
 import './App.css'
-import CardSection from './components/CardSection'
+import CustomerTicket from './components/CustomerTicket'
 import Footer from './components/footer'
 import Navbar from './components/navbar'
 
-function App() {
+const fetchData = async () => {
+  const res = await fetch('/Data.json');
+  return res.json()
+}
 
+function App() {
+  const fetchPromise = fetchData()
 
   return (
     <>
       <div>
         <Navbar></Navbar>
-        <CardSection></CardSection>
+        <Suspense fallback="loading...">
+          <CustomerTicket fetchPromise={fetchPromise}></CustomerTicket>
+        </Suspense>
+
         <Footer></Footer>
 
       </div>
