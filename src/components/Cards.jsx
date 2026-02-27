@@ -1,12 +1,13 @@
 import React from 'react';
 
-const Cards = ({ ticket, handleClick }) => {
+const Cards = ({ ticket, handleClick, handelDivDelete, }) => {
 
     // console.log(ticket.id);
 
+    
     return (
         <div>
-            <div onClick={()=>handleClick(ticket)} className="bg-white shadow-md rounded-lg cursor-pointer p-4 w-105 border border-gray-200 hover:shadow-xl transition-shadow">
+            <div onClick={() => { handleClick(ticket); handelDivDelete(ticket.id); }} className="bg-white shadow-md rounded-lg cursor-pointer p-4 w-105 border border-gray-200 hover:shadow-xl transition-shadow">
 
 
                 <div className="flex items-center justify-between mb-2">

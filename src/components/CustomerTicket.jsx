@@ -3,7 +3,6 @@ import { useState } from "react";
 import TicketStatus from "./TicketStatus";
 import Cards from "./cards";
 import img1 from '../assets/vector1.png'
-import ReslovedStatus from "./ResolvedStatus";
 import ResolvedStatus from "./ResolvedStatus";
 
 const CustomerTicket = ({ fetchPromise }) => {
@@ -19,10 +18,28 @@ const CustomerTicket = ({ fetchPromise }) => {
         setInProgress(newProgress)
     }
 
+    const handelDivDelete = (id) => {
+        // console.log('handelDivDelete', id);
+        console.log(data);
+
+        const RemoveDiv = data.filter(div => div.id !== id)
+        setData(RemoveDiv)
+
+    }
+
     const handelResolved = (result) => {
-        console.log('Resolve card clicked', result);
+        // console.log('Resolve card clicked', result);
         const newResolved = [...Resolved, result]
         setResolved(newResolved)
+
+    }
+    const handelComplete = (id) => {
+        // console.log('handelCompleted clicked', id);
+        const completed = inProgress.filter(problem => problem.id !== id)
+        setInProgress(completed)
+
+        //   const newTodos = todos.filter((todo) => todo.id !== id);
+        // setTodos(newTodos);
 
 
     }
@@ -30,9 +47,9 @@ const CustomerTicket = ({ fetchPromise }) => {
 
 
         <div className="w-400 mx-auto bg-gray-100">
-            <div className='max-w-400  mx-auto  bg-gray-100'>
-                <div className=" bg-gray-100 flex items-center justify-center mx-auto  w-360 p-8">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-20">
+            <div className='max-w-400 mx-auto  bg-gray-100'>
+                <div className=" bg-gray-100 md:flex items-center justify-center mx-auto  w-360 p-8">
+                    <div className=" md:grid grid-cols-2 gap-20">
 
                         {/* In-Progress Card */}
                         <div
@@ -86,23 +103,19 @@ const CustomerTicket = ({ fetchPromise }) => {
 
 
             <h1 className="font-bold text-2xl mt-5 ">Customer Tickets</h1>
-            <div className="grid grid-cols-3 gap-4">
+            <div className=" md:grid grid-cols-3 gap-4">
                 {/* Customer Tickets - takes 2 cols */}
 
                 <div className=" grid grid-cols-1 sm:grid-cols-2 col-span-2 mx-auto gap-5 mb-5 mt-10"
                 >
                     {
                         mainData.map((ticket, id) => {
-
-
                             return <Cards ticket={ticket} key={id}
-                                handleClick={handleClick} data={data}
-                                setData={setData}></Cards>
+                                handleClick={handleClick}
+                                handelDivDelete={handelDivDelete}
+                                data={data}
+                            ></Cards>
                         }
-
-
-
-
                         )
                     }
                 </div>
@@ -114,7 +127,8 @@ const CustomerTicket = ({ fetchPromise }) => {
 
                         <div className="rounded-lg ">
                             {inProgress.map(result => <TicketStatus
-                                handelResolved={handelResolved} key={result.id} result={result}></TicketStatus>)}
+                                handelResolved={handelResolved}
+                                handelComplete={handelComplete} key={result.title} result={result}></TicketStatus>)}
                         </div>
                     </div>
                     <div className="p-5">
